@@ -1,103 +1,118 @@
-# MutualRecursionJava
+# StackQuizJava
 
-A simple Java console application demonstrating **mutual recursion** by determining whether an integer is even or odd.
+A simple Java console application demonstrating the **Stack data structure** using Java's Collections Framework.
 
 ## Overview
 
-MutualRecursionJava is a beginner-friendly Java project that demonstrates how two methods can call each other recursively.
+StackQuizJava is a beginner-friendly Java project that illustrates how a stack stores and removes elements according to the **Last In, First Out (LIFO)** principle.
 
-The program asks the user to enter an integer and then uses two methods, `Even()` and `Odd()`, to determine whether the number is even or odd.
+The program is designed to add shape names to a stack, display the element at the top, remove that element, and print the remaining contents.
 
-This project is intended for students learning recursion, method calls, Boolean return values, and basic console input in Java.
+**Note:** The current source contains a compilation error that must be fixed before the program can run. See [Known Issues](#known-issues).
 
 ## Features
 
-- Accepts integer input through the console.
-- Uses mutual recursion to determine parity.
-- Displays whether the entered number is even or odd.
-- Demonstrates base cases and recursive method calls.
+- Creates a stack for shape names.
+- Adds elements using `push()`.
+- Displays the top element using `peek()`.
+- Removes the top element using `pop()`.
+- Prints the remaining stack contents.
 
 ## Technologies Used
 
 - **Programming Language:** Java
-- **Input Handling:** `Scanner`
-- **Core Concept:** Mutual recursion
+- **Library:** `java.util.Stack`
+- **Core Concept:** Stack data structure and LIFO behavior
 
 ## Project Structure
 
 ```text
-MutualRecursionJava/
-├── MutualRecursion.java
+StackQuizJava/
+├── StackQuiz.java
 └── README.md
 ```
 
 ## How It Works
 
-The program uses two methods:
+The intended program demonstrates these operations:
 
-- **`Even(int n)`** returns `true` when `n` reaches zero. Otherwise, it calls `Odd(n - 1)`.
-- **`Odd(int n)`** returns `false` when `n` reaches zero. Otherwise, it calls `Even(n - 1)`.
+1. Creates a stack named `shapes`.
+2. Adds `"Triangle"` to the stack.
+3. Adds `"Circle"` to the stack.
+4. Uses `peek()` to display the element at the top.
+5. Uses `pop()` to remove the top element.
+6. Prints the remaining stack contents.
 
-For positive integers, the methods alternate calls while decreasing the number until the base case is reached.
-
-For example, when checking `4`, the calls alternate between `Even()` and `Odd()` until `Even(0)` returns `true`.
+A stack follows the **Last In, First Out (LIFO)** principle. Since `"Circle"` is added after `"Triangle"`, Circle is at the top and is removed first.
 
 ## Requirements
 
 - Java Development Kit (JDK)
-- A terminal or command prompt, or a Java-compatible IDE such as IntelliJ IDEA, Eclipse, or Visual Studio Code with Java support.
+- A terminal or command prompt, or a Java-compatible IDE
 
 No third-party libraries are required.
 
 ## How to Run
 
-1. Clone or download the repository.
-2. Open a terminal in the project directory.
-3. Compile the Java source file:
+After fixing the compilation error described below:
+
+1. Open a terminal in the project directory.
+2. Compile the source file:
 
    ```bash
-   javac MutualRecursion.java
+   javac StackQuiz.java
    ```
 
-4. Run the program:
+3. Run the program:
 
    ```bash
-   java MutualRecursion
+   java StackQuiz
    ```
 
-## Example Output
+## Expected Output After the Fix
 
 ```text
-Enter a Number: 4
-4 is an even number.
-
-Enter a Number: 7
-7 is an odd number.
+Circle is at the top of the stack.
+The stack contains: [Triangle]
 ```
 
-The program continues prompting for additional numbers after each result.
+This output assumes the first `push()` statement is corrected to use the declared variable `shapes`.
 
-## Current Limitations
+## Known Issues
 
-- The program runs continuously and has no built-in exit command.
-- The recursive methods work for nonnegative integers but do not correctly handle negative integers.
-- Entering non-integer input causes an input exception.
-- Large positive integers may cause a `StackOverflowError` because each recursive call adds another stack frame.
-- The input scanner is not closed because the program does not have a normal termination path.
-- Method names use uppercase initial letters, which differs from the usual Java naming convention for methods.
+### Compilation Error
 
-## Possible Improvements
+The source declares the stack variable as:
 
-- Add an option to exit the program.
-- Handle negative integers correctly, for example by checking the remainder using `% 2`.
-- Validate user input before processing it.
-- Use iterative logic or a direct parity check when recursion is not the learning objective.
-- Rename methods to `isEven()` and `isOdd()` to follow Java naming conventions.
-- Add comments explaining the recursive call sequence and base cases.
+```java
+Stack shapes = new Stack();
+```
+
+But the next statement uses a different variable name:
+
+```java
+shape.push("Triangle");
+```
+
+The variable `shape` is not declared. This causes a compilation error.
+
+**Fix:** Change the statement to:
+
+```java
+shapes.push("Triangle");
+```
+
+### Additional Improvements
+
+- Use `Stack<String>` instead of a raw `Stack` type to improve type safety.
+- Follow Java naming and formatting conventions consistently.
+- Add explanatory comments for each stack operation.
+- Consider demonstrating what happens when `peek()` or `pop()` is called on an empty stack.
+- If the project is intended to be a quiz, add questions, answer validation, and score tracking. These features are not currently implemented.
 
 ## Project Purpose
 
-This project is an educational example of mutual recursion in Java. It shows how two methods can cooperate through recursive calls to solve a simple classification problem.
+This project serves as a basic educational example of stack operations in Java. It can be extended into a more interactive learning exercise for students studying data structures.
 
 ## Author
 
